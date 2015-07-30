@@ -1,0 +1,97 @@
+---
+layout: post
+title: "jekyll use "
+date: 2015-07-30 16:20
+categories: mypost
+---
+
+由于最近手头项目比较少，同时想着记录一下和拉拉的认识以及加深对git的使用，决定基于jekyll来写一个自己的博客~
+
+对于没有写过博客的我而言，初期的环境搭建工作真是头疼，不过幸好有伟大的百度，让我可以不用自己去对着jekyll官网慢慢摸索了~
+
+好了，下面就是我自己搭建的过程了zzz~
+
+####环境搭建
+由于`jekyll`是基于`ruby`的，所以我们首先就是要安装`ruby`啦~
+
+由于我是windows系统的无法像mac那样命令行直接安装，所以通过百度找到了[rubyinstaller](http://rubyinstaller.org/)，通过下载对应版本的rubyinstaller以及相应的Devkit安装包就能一键安装啦~
+
+上述操作完成后，就可以执行以下操作：
+
+    $ gem install jekyll
+
+满怀欣喜的以为会成功的时候，你们一定会发现安装过程出错了！
+
+    ERROR:  Could not find a valid gem 'rails' (>= 0) in any repository
+    ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)
+    Errno::ETIMEDOUT: Connection timed out - connect(2)
+
+wtf!!! 没有办法只能看着报错问题来尝试解决了o(︶︿︶)o
+
+通过百度查询发现是由于伟（可）大（恨）的`GFW`导致我们连接ruby服务器时会被阻拦！不过还好，我们总是会有机智的程序员们来帮我们解决这个问题~~o(∩_∩)o
+
+    $ gem sources --remove https://rubygems.org/
+    $ gem sources -a https://ruby.taobao.org/
+    $ gem sources -l
+    *** CURRENT SOURCES ***
+
+    https://ruby.taobao.org
+    # 请确保只有 ruby.taobao.org
+    $ gem install jekyll
+
+就是这样，通过rubygems镜像更换gem sources地址我们可以成功完成jekyll的下载啦~~
+
+####生成页面
+
+下面我们就可以使用jekyll来生成我们的静态页面啦!
+
+由于jekyll是使用`liquid`以及`markdown`语言作为编译模版的，所以我们最好也提前对此有一定的了解。当然了，jekyll对于html也是完美支持的。
+
+    $ jekyll new myblog(生成的博客目录名)
+
+上述操作能够帮助我们生成一份默认的目录文件夹。
+
+    .
+    ├── _config.yml
+    ├── _drafts
+     |   ├── begin-with-the-crazy-ideas.textile
+     |   └── on-simplicity-in-technology.markdown
+    ├── _includes
+     |   ├── footer.html
+     |   └── header.html
+    ├── _layouts
+     |   ├── default.html
+     |   └── post.html
+    ├── _posts
+     |   ├── 2007-10-29-why-every-programmer-should-play-nethack.    textile
+     |   └── 2009-04-26-barcamp-boston-4-roundup.textile
+    ├── _data
+     |   └── members.yml
+    ├── _site
+    └── index.html
+
+我们会发现在生成的`myblog`文件夹中会有上述的文件目录存在，对于每个文件目录的作用，我们可以在[jekyll文档](http://jekyll.bootcss.com/)中自己在详细的了解学习，之后再执行以下操作生成本地服务器
+
+    $ jekyll serve --watch
+
+这样我们就可以直接访问我们的页面啦~
+
+####上线部署
+
+可以选择[github pages](pages.github.io)进行上线部署，我们只用在我们的`myblog`文件夹中做以下操作
+
+    $ git init
+    $ git checkout --orphan gh-pages
+    $ git add .
+    $ git commit -m "myblog"
+
+在进入自己的github账户，新建一个远程仓库管理我们的`myblog`，之后我们把本地文件push到远程仓库即可
+
+    $ git remote add origin git://github.com/username/project.git
+    $ git push -u origin gh-pages
+
+之后我们稍作等候，再登录[username.github.io/project](username.github.io/project)就能看见我们的博客啦~~~~
+
+以上就是我的博客建立过程啦，通过jekyll以及git是不是很容易就能建立自己的静态blog啦，赶紧尝试一下吧~
+
+

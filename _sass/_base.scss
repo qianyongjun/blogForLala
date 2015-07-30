@@ -138,13 +138,18 @@ code {
 }
 
 pre {
-    padding: 8px 12px;
-    overflow-x: scroll;
-
+    background: #4d4d4d;
+    margin: 10px 0;
+    padding: 10px 10px;
+    overflow: auto;
+    color: #4c4c4c;
+    line-height: 22.400000000000002px;
     > code {
         border: 0;
         padding-right: 0;
         padding-left: 0;
+        background:none;
+        color:#eef8fc;
     }
 }
 
