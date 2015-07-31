@@ -14,3 +14,16 @@ github_username:  qianyongjun
 # Build settings
 
 markdown: kramdown
+kramdown:
+    input: GFM
+
+collections:
+  - tech
+  - life
+exclude:
+  - vendor
+# 设置多说评论
+comments :
+  provider : duoshuo
+  duoshuo :
+    short_name : Junjun and Lala
